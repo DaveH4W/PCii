@@ -1,0 +1,61 @@
+Category,prodName,qty,unitCost,Margin
+T-Shirt,Basic White Tee,100,15.00,75
+Jeans,Skinny Fit Denim,50,40.00,75
+Jacket,Leather Jacket,30,80.00,75
+Jeans,Slim Fit Jeans,60,45.00,75
+T-Shirt,Graphic Print Tee,70,20.00,75
+Blouse,Button-Down Blouse,80,30.00,75
+Dress,Sundress,40,60.00,75
+Skirt,Mini Skirt,50,25.00,75
+Shirt,Checkered Shirt,90,22.00,75
+Socks,Ankle Socks,150,5.00,75
+Scarf,Knitted Scarf,60,15.00,75
+Hat,Baseball Cap,50,10.00,75
+Gloves,Leather Gloves,40,25.00,75
+Coat,Trench Coat,35,70.00,75
+Shirt Jacket,Utility Shirt Jacket,60,50.00,75
+Leggings,Black Leggings,70,25.00,75
+Cardigan,Open-Front Cardigan,60,45.00,75
+Blazer,Formal Blazer,40,75.00,75
+Cargo Pants,Utility Cargo Pants,45,55.00,75
+Pajamas,Satin Pajama Set,50,30.00,75
+Swimsuit,Bikini Set,50,40.00,75
+Flip Flops,Beach Flip Flops,100,8.00,75
+Tracksuit,Full Zip Tracksuit,35,60.00,75
+Sweatpants,Jogger Sweatpants,50,35.00,75
+Sweatshirt,Graphic Hoodie,40,45.00,75
+Chinos,Lightweight Chinos,60,40.00,75
+Tank Top,Spaghetti Strap Top,80,15.00,75
+Bikini,High Waist Bikini,30,25.00,75
+Denim Jacket,Distressed Denim Jacket,40,60.00,75
+Camisole,Silk Camisole,60,18.00,75
+Polo Shirt,Classic Polo,70,28.00,75
+Boots,Ankle Boots,25,80.00,75
+High Heels,Platform High Heels,35,90.00,75
+Sandals,Leather Sandals,60,25.00,75
+Flats,Pointed Flats,50,30.00,75
+Skort,Skirt with Shorts,50,20.00,75
+Trench Coat,Double-Breasted Trench Coat,15,110.00,75
+Romper,Floral Print Romper,40,50.00,75
+Overalls,Cotton Overalls,25,65.00,75
+Bomber Jacket,Zip-Up Bomber Jacket,30,70.00,75
+Hoodie,Pullover Hoodie,45,40.00,75
+Joggers,Casual Joggers,60,35.00,75
+Tracksuit Bottoms,Fleece Tracksuit Bottoms,50,45.00,75
+Chinos Shorts,Casual Chinos Shorts,80,22.00,75
+Slippers,Memory Foam Slippers,50,15.00,75
+Button-Down Shirt,Striped Button-Down Shirt,60,25.00,75
+Velvet Dress,Velvet Midi Dress,30,85.00,75
+Skater Skirt,A-Line Skater Skirt,35,40.00,75
+Culottes,Wide-Leg Culottes,40,50.00,75
+Midi Skirt,Flowy Midi Skirt,60,28.00,75
+Peacoat,Double-Breasted Peacoat,20,90.00,75
+Linen Shirt,Linen Button-Down Shirt,50,35.00,75
+Canvas Shoes,Canvas Sneakers,100,18.00,75
+Chiffon Dress,Chiffon Maxi Dress,25,55.00,75
+Leather Jacket,Black Leather Jacket,20,120.00,75
+Ankle Boots,Suede Ankle Boots,30,75.00,75
+Puffer Jacket,Winter Puffer Jacket,15,110.00,75
+Cropped Top,Off-Shoulder Cropped Top,50,20.00,75
+Jumpsuit,One-Piece Jumpsuit,40,60.00,75
+Kimono,Floral Kimono,35,45.00,75

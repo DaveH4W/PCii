@@ -1,0 +1,27 @@
+Category,prodName,qty,unitCost,Margin
+Laptop,MacBook Pro,10,1300.00,50
+Laptop,Dell XPS 13,5,900.00,50
+Phone,iPhone 13,15,1000.00,50
+Phone,Samsung Galaxy S21,20,800.00,50
+Phone,Google Pixel 6,12,700.00,50
+Tablet,iPad Air,15,600.00,50
+Tablet,Microsoft Surface Pro,8,700.00,50
+Smartwatch,Apple Watch Series 7,25,400.00,50
+Smartwatch,Fitbit Charge 5,30,150.00,50
+Headphones,Sony WH-1000XM4,25,350.00,50
+Headphones,Bose QuietComfort 35,20,300.00,50
+Wireless Mouse,Logitech MX Master 3,50,50.00,50
+Wireless Mouse,Razer DeathAdder V2,40,40.00,50
+Keyboard,Mechanical Keyboard,40,75.00,50
+Keyboard,Logitech K780,30,50.00,50
+Monitor,LG 27-inch 4K,10,350.00,50
+Monitor,ASUS TUF 32-inch,5,400.00,50
+Camera,Canon EOS 90D,7,1200.00,50
+Camera,Sony Alpha a6400,10,900.00,50
+Camera,Nikon D7500,8,1000.00,50
+Drone,DJI Mavic Air 2,4,900.00,50
+Drone,Parrot Anafi,6,650.00,50
+TV,Samsung 65-inch QLED,12,1000.00,50
+TV,LG OLED 55-inch,7,1500.00,50
+Game Console,PlayStation 5,10,500.00,50
+Game Console,Xbox Series X,8,55
