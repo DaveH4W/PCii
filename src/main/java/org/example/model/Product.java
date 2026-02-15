@@ -7,6 +7,7 @@ public abstract class Product {
     protected double unitCost;  // Cost to the inventory owner
     protected double margin;    // Margin for pricing
 
+
     // Constructor
     public Product(String category, String prodName, int quantity, double unitCost, double margin) {
         this.category = category;
