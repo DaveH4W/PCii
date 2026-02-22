@@ -1,0 +1,303 @@
+\documentclass[12pt]{article}
+
+\usepackage[a4paper, margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{longtable}
+
+\title{Inventory System Project Report}
+\author{Inventory Management System -- Data Producer Module}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Introduction}
+
+This document describes the structure and functionality of a Java-based Inventory System developed as part of a modular enterprise architecture. The current implementation represents the \textbf{Data Producer layer}, responsible for reading product data from CSV files, storing it in memory, performing calculations, and preparing it for persistence in a relational database through JDBC.
+
+The system demonstrates object-oriented principles including abstraction, inheritance, polymorphism, and separation of concerns.
+
+\section{Project Architecture Overview}
+
+The system is organized into the following logical components:
+
+\begin{itemize}
+    \item \textbf{Model Layer} -- Defines the product hierarchy.
+    \item \textbf{I/O Layer} -- Handles CSV data ingestion.
+    \item \textbf{Application Layer (Main)} -- Provides console interaction and business logic.
+    \item \textbf{Data Consumer Layer (JDBC)} -- Responsible for database persistence (external to this report).
+\end{itemize}
+
+\section{Model Layer}
+
+\subsection{Abstract Class: Product}
+
+The \texttt{Product} class represents a generic inventory item and defines attributes common to all product types:
+
+\begin{itemize}
+    \item Category
+    \item Product Name
+    \item Quantity
+    \item Unit Cost
+    \item Margin
+\end{itemize}
+
+It provides shared behavior:
+
+\begin{itemize}
+    \item Inventory value calculation
+    \item Abstract unit price calculation
+    \item Abstract packing/shipping cost calculation
+\end{itemize}
+
+This design enforces a contract requiring subclasses to implement pricing and packing logic.
+
+\subsection{Subclass: Electronics}
+
+The \texttt{Electronics} class extends \texttt{Product} and represents electronic goods.
+
+Responsibilities:
+
+\begin{itemize}
+    \item Implements pricing based on margin.
+    \item Implements packing cost based on weight.
+\end{itemize}
+
+The overridden \texttt{getShippingCost(double weight)} method demonstrates subclass-specific behavior by computing packing requirements using a weight parameter.
+
+\subsection{Subclass: Clothing}
+
+The \texttt{Clothing} class extends \texttt{Product} and represents apparel products.
+
+Responsibilities:
+
+\begin{itemize}
+    \item Implements pricing based on margin.
+    \item Implements packing cost based on volume.
+\end{itemize}
+
+The overridden \texttt{getShippingCost(double volume)} method demonstrates polymorphism through volume-based packing calculation.
+
+\section{Demonstration of Polymorphism}
+
+The system uses polymorphism through:
+
+\begin{itemize}
+    \item A shared \texttt{List<Product>} collection.
+    \item Overridden implementations of \texttt{getUnitPrice()}.
+    \item Overridden implementations of \texttt{getShippingCost(double)}.
+\end{itemize}
+
+At runtime, the correct subclass method is invoked depending on the actual object type, demonstrating dynamic method dispatch.
+
+\section{I/O Layer: CSVProductReader}
+
+The \texttt{CSVProductReader} class is responsible for:
+
+\begin{itemize}
+    \item Reading CSV files from the resources directory.
+    \item Validating mandatory fields.
+    \item Parsing numeric values safely.
+    \item Instantiating appropriate subclass objects.
+    \item Returning lists of \texttt{Product}.
+\end{itemize}
+
+This class isolates file parsing logic from business logic, improving maintainability and modularity.
+
+\section{Application Layer (Main)}
+
+The \texttt{Main} class provides a console-based interface with options to:
+
+\begin{enumerate}
+    \item Import Electronics CSV
+    \item Import Clothing CSV
+    \item Display Electronics
+    \item Display Clothing
+    \item Compute Total Inventory Value
+    \item Display Packing Costs
+    \item Exit
+\end{enumerate}
+
+Packing costs are calculated by requesting per-unit weight or volume from the system administrator. This demonstrates how subclass-specific parameters influence overridden methods without modifying shared data structures.
+
+\section{Design Decisions}
+
+\subsection{Minimal Intrusion Principle}
+
+The project intentionally avoids modifying:
+
+\begin{itemize}
+    \item CSV parsing logic
+    \item Existing constructors
+    \item Shared in-memory product structures
+\end{itemize}
+
+This ensures compatibility with downstream JDBC persistence logic.
+
+\subsection{Separation of Concerns}
+
+\begin{itemize}
+    \item Model classes handle domain logic.
+    \item I/O classes handle file ingestion.
+    \item Main handles interaction and orchestration.
+    \item JDBC layer handles persistence.
+\end{itemize}
+
+\subsection{Extensibility}
+
+The design supports future enhancements:
+
+\begin{itemize}
+    \item Storing actual weight/volume per product.
+    \item Implementing real shipping calculations.
+    \item Adding additional product subclasses.
+    \item Integrating with a warehouse management system.
+\end{itemize}
+
+\section{Role Within a Larger Inventory System}
+
+Within an enterprise architecture, this module functions as:
+
+\begin{itemize}
+    \item A \textbf{data ingestion component}.
+    \item A \textbf{business rule processor}.
+    \item A \textbf{pre-persistence validation layer}.
+\end{itemize}
+
+It prepares structured, validated product objects for insertion into an SQL database through JDBC, forming part of a multi-tier inventory management system.
+
+\section{Future Work: Toward a Full Inventory Simulation System}
+
+The current implementation represents a foundational data ingestion and processing module within a broader inventory architecture. While it successfully demonstrates object-oriented design, CSV ingestion, and preparation for database persistence, several extensions would transform it into a fully operational inventory management and simulation system.
+
+\subsection{Inventory State Management}
+
+Future versions should support dynamic stock movement rather than static inventory records. This includes:
+
+\begin{itemize}
+    \item Stock In (receiving goods from suppliers)
+    \item Stock Out (sales or shipments to customers)
+    \item Inventory adjustments (corrections, damages, audits)
+\end{itemize}
+
+This would require controlled methods for increasing and decreasing product quantities with validation to prevent negative inventory levels.
+
+\subsection{Transaction Modeling}
+
+A realistic inventory system must record the reason behind quantity changes. Introducing an \texttt{InventoryTransaction} class would enable:
+
+\begin{itemize}
+    \item Transaction type tracking (IN / OUT / ADJUSTMENT)
+    \item Timestamp recording
+    \item Supplier or customer reference
+    \item Historical auditing
+\end{itemize}
+
+This enables traceability and supports reporting and compliance requirements.
+
+\subsection{Service Layer Introduction}
+
+Currently, the main application coordinates logic directly. A future architectural improvement would introduce an \texttt{InventoryService} layer responsible for:
+
+\begin{itemize}
+    \item Processing transactions
+    \item Validating stock levels
+    \item Applying business rules
+    \item Triggering low-stock alerts
+\end{itemize}
+
+This improves separation of concerns and scalability.
+
+\subsection{Warehouse and Location Modeling}
+
+To simulate real-world logistics, the system could introduce:
+
+\begin{itemize}
+    \item Multiple warehouses
+    \item Storage locations or bins
+    \item Capacity constraints
+    \item Volume-based storage optimization
+\end{itemize}
+
+This allows inventory to be tracked not only by product but also by physical location.
+
+\subsection{Reorder and Safety Stock Logic}
+
+A practical inventory system typically includes:
+
+\begin{itemize}
+    \item Reorder points
+    \item Safety stock levels
+    \item Automatic purchase order generation
+    \item Lead time simulation
+\end{itemize}
+
+These features help prevent stockouts and optimize supply chain efficiency.
+
+\subsection{Inventory Metrics and Reporting}
+
+Future enhancements may compute operational metrics such as:
+
+\begin{itemize}
+    \item Inventory turnover rate
+    \item Days of inventory on hand
+    \item Fast-moving and slow-moving items
+    \item Dead stock analysis
+    \item Historical inventory valuation
+\end{itemize}
+
+These analytical tools provide strategic business insight.
+
+\subsection{Simulation Engine}
+
+To evolve into a full inventory simulator, an event-driven engine could be implemented to model:
+
+\begin{itemize}
+    \item Random customer demand
+    \item Supplier lead times
+    \item Seasonal demand variations
+    \item Backorders and stockouts
+\end{itemize}
+
+A simulation loop operating over simulated time periods (e.g., days or weeks) would allow the study of system behavior under varying operational conditions.
+
+\subsection{Advanced Extensions}
+
+Additional long-term enhancements may include:
+
+\begin{itemize}
+    \item FIFO/LIFO inventory valuation
+    \item Batch tracking
+    \item Expiration date management
+    \item Returns processing
+    \item Role-based access control
+    \item Graphical user interface integration
+\end{itemize}
+
+\subsection{Architectural Evolution}
+
+With these enhancements, the system would evolve from a static data ingestion module into a layered architecture consisting of:
+
+\begin{itemize}
+    \item Presentation Layer (Console or GUI)
+    \item Service Layer (Business Logic)
+    \item Domain Model (Products, Transactions, Warehouses)
+    \item Persistence Layer (JDBC / SQL Database)
+    \item Simulation Engine (Optional Analytical Component)
+\end{itemize}
+
+Such an evolution would position the project as a fully functional inventory management and simulation platform suitable for academic research, enterprise prototyping, or operational training environments.
+
+
+
+\section{Conclusion}
+
+The Inventory System demonstrates key object-oriented principles while maintaining architectural stability. The addition of subclass-specific packing calculations illustrates polymorphism without disrupting the data production workflow.
+
+The system is modular, extensible, and suitable for integration into a broader enterprise inventory solution.
+
+\end{document}

@@ -157,6 +157,6 @@ public class Main {
             totalPackingUnits += packingCost;
         }
 
-        System.out.printf("Total %s packing units: %.2f\n", category, totalPackingUnits);
+        System.out.printf("Total %s packing cost: %.2f\n", category, totalPackingUnits);
     }
 }
